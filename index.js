@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const PORT = process.env.PORT || 8080;
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/social-media-app', console.log('Connected to MongoDB'));
