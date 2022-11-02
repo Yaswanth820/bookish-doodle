@@ -3,7 +3,7 @@ require('dotenv').config()
 
 const createToken = (user) => {
     const token = jwt.sign({
-        email: user.email,
+        user: user,
     }, process.env.TOKEN_SECRET);
     return token;
 }
@@ -21,4 +21,4 @@ const verifyToken = (req, res, next) => {
         res.status(400).send('Invalid Token');
     }
 }
-module.exports = {createToken, verifyToken};
+module.exports = { createToken, verifyToken };
