@@ -8,10 +8,12 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/social-media-app', console.log('Connected to MongoDB'));
 
 const userRoutes = require('./routes/User');
+const postRoutes = require('./routes/Post');
 
 // Middlewares
 app.use(express.json());
 app.use('/api', userRoutes);
+app.use('/api', postRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
