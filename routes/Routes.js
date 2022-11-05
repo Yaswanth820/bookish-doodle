@@ -66,12 +66,12 @@ router.post('/unfollow/:id', verifyToken, async (req, res) => {
     const currentUser = await User.findById(req.user._id);
     if (!currentUser) return res.status(404).json({ error: 'User not found' });
 
-    if (req.params.id === req.user._id) return res.status(400).json({ error: 'You cannot follow/unfollow yourself' });
+    if (req.params.id === req.user._id) return res.status(400).json({ error: 'You cannot follow or unfollow yourself' });
 
     if (!currentUser.following.includes(req.params.id)) return res.status(400).json({ error: 'Not following' });
 
-    currentUser.following = currentUser.following.filter(id => id !== req.params.id);
-    user.followers = user.followers.filter(id => id !== req.user._id);
+    currentUser.following = currentUser.following.filter(id => id != req.params.id);
+    user.followers = user.followers.filter(id => id != req.user._id);
 
     try {
         await currentUser.save();
@@ -195,7 +195,7 @@ router.post('/unlike/:id', verifyToken, async (req, res) => {
 
     if (!post.likes.includes(req.user._id)) return res.status(404).json({ error: 'Not liked' });
 
-    post.likes = post.likes.filter(id => id !== req.user._id);
+    post.likes = post.likes.filter(id => id != req.user._id);
 
     try {
         await post.save();
