@@ -8,6 +8,7 @@ const CommentSchema = new Schema({
     },
     desc: {
         type: String,
+        required: true
     }
 });
 
@@ -18,6 +19,7 @@ const PostSchema = new Schema({
     },
     title: {
         type: String,
+        required: true
     },
     desc: {
         type: String,
