@@ -76,7 +76,7 @@ router.post('/unfollow/:id', verifyToken, async (req, res) => {
     try {
         await currentUser.save();
         await user.save();
-        res.json({ message: `Unfollowed ${user.name} successfully` });
+        res.json({ message: `You are no longer following ${user.name}` });
     }
     catch (err) {
         res.status(400).send(err);
