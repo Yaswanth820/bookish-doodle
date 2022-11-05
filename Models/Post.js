@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const CommentSchema = new Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    desc: {
+        type: String,
+    }
+});
+
 const PostSchema = new Schema({
     userId: {
         type: String,
@@ -21,9 +31,10 @@ const PostSchema = new Schema({
         default: []
     },
     comments: {
-        type: Array,
+        type: [CommentSchema],
         default: []
     }
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
+module.exports = { Post };

@@ -3,7 +3,9 @@ require('dotenv').config()
 
 const createToken = (user) => {
     const token = jwt.sign({
-        user: user,
+        _id: user._id,
+        name: user.name,
+        email: user.email
     }, process.env.TOKEN_SECRET);
     return token;
 }
@@ -11,7 +13,7 @@ const createToken = (user) => {
 const verifyToken = (req, res, next) => {
     const token = req.header('auth-token');
     if (!token) return res.status(401).send('Access Denied');
-
+ 
     try {
         const verified = jwt.verify(token, process.env.TOKEN_SECRET);
         req.user = verified;
