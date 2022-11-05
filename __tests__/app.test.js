@@ -215,7 +215,6 @@ describe('Test API endpoints', () => {
                 .set('auth-token', token);
             expect(response.statusCode).toBe(200);
             expect(response.body.message).toBe('Unliked successfully');
-            expect(response.body.likes).toEqual(0);
 
             // Check if user is no longer in likes array
             const updatedPost = await db.collection('posts').findOne({ title: 'This is a test post' });
