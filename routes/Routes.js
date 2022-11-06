@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../Models/User');
 const { Post } = require('../Models/Post');
 const { createToken, verifyToken } = require('../utils/Auth');
-
+const mongoose = require('mongoose');
 
 /************************* User Routes *************************/
 
@@ -35,6 +35,7 @@ router.post('/authenticate', async (req, res) => {
 
 // @route   POST /api/follow/{id}
 router.post('/follow/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'User not found' });
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -60,6 +61,7 @@ router.post('/follow/:id', verifyToken, async (req, res) => {
 
 // @route   POST /api/unfollow/{id}
 router.post('/unfollow/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'User not found' });
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -116,8 +118,8 @@ router.post('/posts', verifyToken, async (req, res) => {
 
 // @route   DELETE /api/posts/{id}
 router.delete('/posts/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'Post not found' });
     const post = await Post.findById(req.params.id);
-
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
     if (post.userId !== req.user._id) {
@@ -156,6 +158,8 @@ router.get('/all_posts', verifyToken, async (req, res) => {
 
 // @route   GET /api/post/{id}
 router.get('/posts/:id', async (req, res) => {
+    // if invalid _id
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'Post not found' });
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ error: 'No post found' });
 
@@ -172,6 +176,7 @@ router.get('/posts/:id', async (req, res) => {
 
 // @route   POST /api/like/{id}
 router.post('/like/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'Post not found' });
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
@@ -190,6 +195,7 @@ router.post('/like/:id', verifyToken, async (req, res) => {
 
 // @route   POST /api/unlike/{id}
 router.post('/unlike/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'Post not found' });
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
@@ -208,6 +214,7 @@ router.post('/unlike/:id', verifyToken, async (req, res) => {
 
 // @route   POST /api/comments
 router.post('/comment/:id', verifyToken, async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({ error: 'Post not found' });
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
