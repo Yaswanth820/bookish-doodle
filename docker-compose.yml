@@ -1,3 +1,4 @@
+# using docker-compose ==> easier to manage
 version: '3.4'
 
 services:
