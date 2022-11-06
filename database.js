@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 module.exports.setupDB = () => {
     // mongodb+srv://user:user123@cluster1.gle5k.mongodb.net/DriverDB
     // mongodb://mongo:27017/social-media-app
-    mongoose.connect('mongodb://mongo:27017/social-media-app', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    mongoose.connect('mongodb+srv://user:user123@cluster1.gle5k.mongodb.net/social-media-app');
     const db = mongoose.connection;
     db.once('open', () => {
         console.log('Connected to MongoDB');
