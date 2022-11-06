@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const User = require('../models/User');
-const { Post } = require('../models/Post');
+const User = require('../Models/User');
+const { Post } = require('../Models/Post');
 const { createToken, verifyToken } = require('../utils/Auth');
 
 
