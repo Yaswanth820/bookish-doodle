@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 module.exports.setupDB = () => {
-    // mongodb+srv://user:user123@cluster1.gle5k.mongodb.net/DriverDB
+    // Cloud DB
+    // mongodb+srv://user:user123@cluster1.gle5k.mongodb.net/social-media-app
+    
+    // Local DB
     // mongodb://mongo:27017/social-media-app
     mongoose.connect('mongodb+srv://user:user123@cluster1.gle5k.mongodb.net/social-media-app');
     const db = mongoose.connection;
