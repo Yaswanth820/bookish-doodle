@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports.setupDB = () => {
-    mongoose.connect('mongodb://localhost:27017/social-media-app');
+    mongoose.connect('mongodb://mongo:27017/social-media-app');
     const db = mongoose.connection;
     db.once('open', () => {
         console.log('Connected to MongoDB');
